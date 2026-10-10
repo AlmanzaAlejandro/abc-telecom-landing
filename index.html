@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ABC Telecom — Lanza tu marca de telefonía móvil</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F4F1;}
+a{color:#0F1A1C;}a:hover{color:#B8400E;}
+input[type=range]{accent-color:#FF5A1F;width:100%;}
+input,select{font:inherit;}
+</style>
+</helmet>
+
+<div style="font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #0F1A1C; background: #F3F4F1; min-height: 100vh;">
+
+<!-- NAV -->
+<header style="border-bottom: 1px solid #D5D9D6; background: #F3F4F1;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+<a href="#inicio" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: #0F1A1C; color: #F3F4F1; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 15px;">abc</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; color: #0F1A1C;">ABC Telecom</span>
+</a>
+<nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 22px; font-size: 15px;">
+<a href="#modelos" style="text-decoration: none;">Para integradores TI</a>
+<a href="#modelos" style="text-decoration: none;">Para redes de mercadeo</a>
+<a href="#plataforma" style="text-decoration: none;">Plataforma</a>
+<a href="#proceso" style="text-decoration: none;">Cómo funciona</a>
+<a href="#fundador" style="text-decoration: none;">Quién está detrás</a>
+</nav>
+<a href="#diagnostico" style="text-decoration: none; background: {{accent}}; color: #0F1A1C; font-weight: 600; padding: 12px 18px; border-radius: 8px; font-size: 15px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center;">Agenda tu diagnóstico</a>
+</div>
+</header>
+
+<!-- HERO -->
+<section id="inicio" style="max-width: 1240px; margin: 0 auto; padding: 72px 24px 56px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5759;">Habilitador OMV · Concesión única · Red Altán</div>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 5.4vw, 72px); line-height: 1.02; letter-spacing: -0.02em;">Tu cartera ya confía en ti. Véndele también su línea celular.</h1>
+
+<div role="group" aria-label="¿Qué tipo de negocio tienes?" style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{segments}}" as="s" hint-placeholder-count="3">
+<button type="button" onClick="{{s.pick}}" aria-pressed="{{s.pressed}}" style="cursor: pointer; border: 1px solid #0F1A1C; border-radius: 999px; padding: 10px 16px; min-height: 44px; font-size: 15px; font-weight: 500; background: {{s.bg}}; color: {{s.fg}};">{{s.label}}</button>
+</sc-for>
+</div>
+
+<sc-if value="{{isTI}}" hint-placeholder-val="{{true}}">
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #2F3B3D; max-width: 620px;">Ya administras la red, los equipos y el soporte de tus clientes. Súmale SIM y eSIM con tu marca, factura la línea junto con tu póliza y conéctala a sus sistemas por API. Ingreso recurrente sobre clientes que ya tienes.</p>
+</sc-if>
+<sc-if value="{{isMLM}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #2F3B3D; max-width: 620px;">Tu comunidad paga un celular cada mes. Que lo pague a tu marca. Cada distribuidor vende y recarga desde su app, y cobra una comisión residual por cada línea activa en su red, mes tras mes.</p>
+</sc-if>
+<sc-if value="{{isOtro}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #2F3B3D; max-width: 620px;">WISP, ISP, cadena comercial o marca con comunidad: lanza tu propia compañía celular con tu logo, tus planes y tus canales, sobre la red de Altán y con la plataforma y el cumplimiento ya resueltos.</p>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px;">
+<a href="#diagnostico" style="text-decoration: none; background: {{accent}}; color: #0F1A1C; font-weight: 600; padding: 15px 22px; border-radius: 8px; font-size: 17px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center;">Agenda un diagnóstico de 30 min</a>
+<a href="#guia" style="text-decoration: none; border: 1px solid #0F1A1C; color: #0F1A1C; font-weight: 600; padding: 15px 22px; border-radius: 8px; font-size: 17px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center;">Descarga la guía para lanzar un OMV</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; font-size: 14px; color: #4A5759;">
+<span>SIM física y eSIM</span><span>·</span><span>Portabilidad</span><span>·</span><span>Recargas en red nacional</span><span>·</span><span>Tarifas registradas ante la CRT</span>
+</div>
+</div>
+
+<!-- Hero visual: SIM card + offer -->
+<div style="flex: 1 1 360px; min-width: 0; display: flex; justify-content: center;">
+<div style="position: relative; width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 16px;">
+<div style="background: #0F1A1C; color: #F3F4F1; border-radius: 22px; padding: 28px; aspect-ratio: 1.58; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 24px 60px rgba(15,26,28,0.25);">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<div style="width: 58px; height: 46px; border-radius: 8px; background: #C9B37A; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; padding: 6px; box-sizing: border-box;">
+<span style="background: #B39A5C; border-radius: 2px;"></span><span style="background: #B39A5C; border-radius: 2px;"></span><span style="background: #B39A5C; border-radius: 2px;"></span>
+<span style="background: #B39A5C; border-radius: 2px;"></span><span style="background: #B39A5C; border-radius: 2px;"></span><span style="background: #B39A5C; border-radius: 2px;"></span>
+</div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A9B4B5;">4.5G · 700 MHz</span>
+</div>
+<div>
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 34px; letter-spacing: -0.01em;">[TU MARCA]</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9B4B5; margin-top: 6px;">tumarca.mx · Operado sobre Red Altán</div>
+</div>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #4A5759;">Tu plan estrella</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 22px;">[Nombre del plan]</span>
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 22px;">$[precio]<span style="font-size: 14px; font-weight: 500; color: #4A5759;"> /mes</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px;">
+<span style="background: #EEF0EC; border-radius: 6px; padding: 5px 9px;">[GB] de datos</span>
+<span style="background: #EEF0EC; border-radius: 6px; padding: 5px 9px;">Redes sociales</span>
+<span style="background: #EEF0EC; border-radius: 6px; padding: 5px 9px;">Llamadas y SMS</span>
+<span style="background: #EEF0EC; border-radius: 6px; padding: 5px 9px;">Hotspot</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROOF STRIP -->
+<section aria-label="Respaldo" style="border-top: 1px solid #D5D9D6; border-bottom: 1px solid #D5D9D6; background: #FFFFFF;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 36px 24px; display: flex; flex-direction: column; gap: 28px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
+<div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 44px; line-height: 1;">~70</div><div style="font-size: 15px; color: #4A5759; margin-top: 6px;">marcas operando con nuestra plataforma</div></div>
+<div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 44px; line-height: 1;">5 años</div><div style="font-size: 15px; color: #4A5759; margin-top: 6px;">habilitando operadores móviles virtuales</div></div>
+<div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 44px; line-height: 1;">28 años</div><div style="font-size: 15px; color: #4A5759; margin-top: 6px;">de experiencia del fundador en telecom</div></div>
+<div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 44px; line-height: 1;">[N]</div><div style="font-size: 15px; color: #4A5759; margin-top: 6px;">puntos de recarga en el país</div></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #4A5759; margin-right: 8px;">Marcas que ya operan</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+<span style="border: 1px dashed #A9B4B5; border-radius: 8px; padding: 12px 20px; font-size: 13px; color: #4A5759;">[LOGO CLIENTE]</span>
+</div>
+</div>
+</section>
+
+<!-- TWO MODELS -->
+<section id="modelos" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5759;">Dos modelos que ya funcionan</div>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.05; letter-spacing: -0.015em;">No necesitas clientes nuevos. Necesitas venderle algo más a los que ya tienes.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5759;">01 · Integradores de TI y redes</div>
+<h3 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 30px; line-height: 1.1;">La línea celular entra en tu póliza de servicio.</h3>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px; line-height: 1.5;">
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0F1A1C" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>Líneas y eSIM corporativas con tu marca para flotillas, técnicos y fuerza de ventas de tus clientes.</span></li>
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0F1A1C" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>API para activar, suspender y consultar consumo desde tu propio portal o el ERP del cliente.</span></li>
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0F1A1C" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>SIM de datos para IoT y respaldo de conectividad: cámaras, terminales punto de venta, GPS, routers.</span></li>
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0F1A1C" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>Factura la línea en el mismo CFDI que tu soporte. Un proveedor menos para tu cliente, un ingreso más para ti.</span></li>
+</ul>
+<a href="#diagnostico" style="margin-top: auto; font-weight: 600; font-size: 16px;">Ver el modelo para integradores →</a>
+</article>
+
+<article style="background: #0F1A1C; color: #F3F4F1; border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9B4B5;">02 · Redes de mercadeo y comunidades</div>
+<h3 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 30px; line-height: 1.1;">El producto que tu red consume cada mes, con tu nombre.</h3>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px; line-height: 1.5;">
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF5A1F" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>App de distribuidor: vende SIM, activa, porta y recarga desde el celular.</span></li>
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF5A1F" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>Comisiones multinivel configurables por nivel, calculadas sobre cada recarga.</span></li>
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF5A1F" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>Residual real: la línea se recarga cada mes, la comisión también.</span></li>
+<li style="display: flex; gap: 12px;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#FF5A1F" stroke-width="2" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px;"><path d="M4 10.5l4 4 8-9"></path></svg><span>Bot de WhatsApp que atiende, cobra y recuerda la recarga por tu red.</span></li>
+</ul>
+<a href="#diagnostico" style="margin-top: auto; font-weight: 600; font-size: 16px; color: #F3F4F1;">Ver el modelo para redes de mercadeo →</a>
+</article>
+</div>
+</section>
+
+<!-- CALCULATOR -->
+<section aria-labelledby="calc-title" style="background: #FFFFFF; border-top: 1px solid #D5D9D6; border-bottom: 1px solid #D5D9D6;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center;">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5759;">Haz la cuenta</div>
+<h2 id="calc-title" style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.05;">¿Cuánto vale tu cartera en líneas?</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #2F3B3D;">Mueve las barras con tus números. Es un estimado de ingreso recurrente; tu margen real depende del plan y del paquete que elijas.</p>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; background: #F3F4F1; border: 1px solid #D5D9D6; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 22px;">
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<label for="calc-lines" style="display: flex; justify-content: space-between; font-weight: 600; font-size: 15px;"><span>Líneas activas</span><span style="font-family: 'IBM Plex Mono', monospace;">{{linesTxt}}</span></label>
+<input id="calc-lines" type="range" min="100" max="20000" step="100" value="{{lines}}" onChange="{{onLines}}">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<label for="calc-arpu" style="display: flex; justify-content: space-between; font-weight: 600; font-size: 15px;"><span>Recarga promedio mensual</span><span style="font-family: 'IBM Plex Mono', monospace;">{{arpuTxt}}</span></label>
+<input id="calc-arpu" type="range" min="99" max="499" step="10" value="{{arpu}}" onChange="{{onArpu}}">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<label for="calc-margin" style="display: flex; justify-content: space-between; font-weight: 600; font-size: 15px;"><span>Margen sobre la recarga</span><span style="font-family: 'IBM Plex Mono', monospace;">{{marginTxt}}</span></label>
+<input id="calc-margin" type="range" min="5" max="40" step="1" value="{{margin}}" onChange="{{onMargin}}">
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; border-top: 1px solid #D5D9D6; padding-top: 20px;">
+<div><div style="font-size: 14px; color: #4A5759;">Ingreso para tu marca al mes</div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px;">{{monthlyTxt}}</div></div>
+<div><div style="font-size: 14px; color: #4A5759;">Al año</div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px;">{{yearlyTxt}}</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOUNDER AUTHORITY -->
+<section id="fundador" style="background: #0F1A1C; color: #F3F4F1;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<div style="aspect-ratio: 4 / 5; border-radius: 18px; border: 1px dashed #5B6A6C; display: flex; align-items: center; justify-content: center; color: #A9B4B5; font-size: 15px;">[FOTO DE RAFAEL]</div>
+<div>
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 24px;">Rafael Jiménez</div>
+<div style="font-size: 15px; color: #A9B4B5; margin-top: 4px;">Fundador y CEO, Grupo Bitelit · ABC Telecom</div>
+</div>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #FF5A1F;">Quién está detrás</div>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(32px, 3.8vw, 52px); line-height: 1.04; letter-spacing: -0.015em;">Hemos estado en los tres lados de la mesa: el operador, la plataforma y la red.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #C9D1D2; max-width: 680px;">Casi tres décadas en telecomunicaciones en América Latina. Antes de habilitar a otros, Rafael lanzó un operador virtual, construyó plataforma de habilitación y vendió la red mayorista sobre la que hoy operas.</p>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column;">
+<li style="display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 22px 0; border-top: 1px solid #2B3A3D;">
+<div style="flex: 0 0 220px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px;">Virgin Mobile México</div>
+<div style="flex: 1 1 320px; min-width: 0;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF5A1F;">El operador · CTO / COO</div><div style="font-size: 16px; line-height: 1.5; color: #C9D1D2; margin-top: 4px;">Lanzó el primer operador móvil virtual de México. Sabe lo que se siente operar una marca desde adentro.</div></div>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 22px 0; border-top: 1px solid #2B3A3D;">
+<div style="flex: 0 0 220px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px;">Xius</div>
+<div style="flex: 1 1 320px; min-width: 0;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF5A1F;">La plataforma · habilitador de MVNO</div><div style="font-size: 16px; line-height: 1.5; color: #C9D1D2; margin-top: 4px;">Del lado de la tecnología que hace funcionar a los operadores virtuales: facturación, activación y operación.</div></div>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 22px 0; border-top: 1px solid #2B3A3D;">
+<div style="flex: 0 0 220px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px;">Altán Redes</div>
+<div style="flex: 1 1 320px; min-width: 0;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF5A1F;">La red · Key Account Manager</div><div style="font-size: 16px; line-height: 1.5; color: #C9D1D2; margin-top: 4px;">Cerró cuatro agregadores de la Red Compartida. Conoce el negocio mayorista por dentro.</div></div>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 22px 0; border-top: 1px solid #2B3A3D; border-bottom: 1px solid #2B3A3D;">
+<div style="flex: 0 0 220px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px;">Ericsson · Nokia · Amdocs · Huawei</div>
+<div style="flex: 1 1 320px; min-width: 0;"><div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #FF5A1F;">La base · desde 1998</div><div style="font-size: 16px; line-height: 1.5; color: #C9D1D2; margin-top: 4px;">Redes, BSS/OSS y entrega de programas en Venezuela, Puerto Rico, Costa Rica y México.</div></div>
+</li>
+</ol>
+<blockquote style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 500; font-size: 24px; line-height: 1.35; color: #F3F4F1; max-width: 680px;">“La mayoría de los OMV no fracasan por la red. Fracasan por la operación. Por eso no te vendemos software: te acompañamos a operar.”</blockquote>
+</div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section id="proceso" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5759;">Cómo funciona</div>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.05;">De la idea a tu primera línea activa en [N] semanas.</h2>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+<li style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5759;">Paso 1 · Semana 1</span><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px;">Diagnóstico</strong><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Revisamos tu cartera o tu red, el segmento y el caso de negocio. Sales con una proyección, no con un folleto.</span></li>
+<li style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5759;">Paso 2</span><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px;">Marca y oferta</strong><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Nombre, planes, precios, SIM y eSIM. Registramos tus tarifas ante la CRT y preparamos tus documentos legales.</span></li>
+<li style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5759;">Paso 3</span><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px;">Plataforma y canales</strong><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Tu web, tu app, recargas, distribuidores y WhatsApp configurados con tu marca. Capacitamos a tu equipo.</span></li>
+<li style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5759;">Paso 4</span><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px;">Lanzamiento y operación</strong><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Te acompañamos en el arranque y en la operación diaria: soporte, escalamiento con Altán y cumplimiento.</span></li>
+</ol>
+</section>
+
+<!-- PLATFORM -->
+<section id="plataforma" style="background: #FFFFFF; border-top: 1px solid #D5D9D6; border-bottom: 1px solid #D5D9D6;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between;">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 12px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5759;">La plataforma</div>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.05;">Tú pones la marca y los clientes. Lo demás ya está construido.</h2>
+</div>
+<p style="flex: 1 1 360px; min-width: 0; margin: 0; font-size: 17px; line-height: 1.55; color: #2F3B3D;">Elige qué operas tú y qué operamos nosotros. Empiezas con lo básico y vas sumando módulos conforme crece tu base.</p>
+</div>
+
+<!-- three layers -->
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; border: 2px solid #0F1A1C; border-radius: 14px; padding: 18px 22px;"><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px;">Tu marca</strong><span style="font-size: 15px; color: #2F3B3D;">Logo, planes, precios, clientes, canales de venta</span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; background: {{accent}}; border-radius: 14px; padding: 18px 22px;"><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px;">Plataforma ABC Telecom</strong><span style="font-size: 15px; color: #0F1A1C;">Activación, recargas, facturación, app, distribuidores, cumplimiento</span></div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; background: #0F1A1C; color: #F3F4F1; border-radius: 14px; padding: 18px 22px;"><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px;">Red Altán</strong><span style="font-size: 15px; color: #C9D1D2;">4.5G nacional en 700 MHz, Red Compartida</span></div>
+</div>
+
+<!-- modules -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">SIM y eSIM con tu marca</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Incluido</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Alta, activación, suspensión, reemplazo y baja.</span></div>
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">Portabilidad y vinculación</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Incluido</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Tus clientes se cambian con su mismo número.</span></div>
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">Web y app con tu marca</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Incluido</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Compra, recarga y autogestión en iOS, Android y web.</span></div>
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">Recargas en red nacional</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Incluido</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Tiendas, farmacias y comercios, más pago con tarjeta y SPEI.</span></div>
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">Distribuidores y comisiones</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Escala</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Jerarquías, niveles, comisiones y control de efectivo.</span></div>
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">WhatsApp y bot de ventas</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Escala</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Atención, cobro y recordatorio de recarga por WhatsApp.</span></div>
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">API para integradores</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Integración</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Activa, consulta y gestiona líneas desde tus sistemas.</span></div>
+<div style="border: 1px solid #D5D9D6; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; gap: 8px;"><strong style="font-size: 17px;">Cumplimiento CRT y Profeco</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 3px 8px; height: fit-content;">Incluido</span></div><span style="font-size: 15px; line-height: 1.5; color: #2F3B3D;">Registro de tarifas, contrato de adhesión, aviso de privacidad.</span></div>
+</div>
+</div>
+</section>
+
+<!-- PACKAGES -->
+<section id="paquetes" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px;">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5759;">Paquetes</div>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.05;">Empieza chico. Crece sin migrar.</h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+<div style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+<strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px;">Arranque</strong>
+<span style="font-size: 15px; color: #2F3B3D;">Para validar tu marca con tu primera cartera.</span>
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px;">Desde $[PRECIO]</div>
+<ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7;"><li>Marca, planes y registro CRT</li><li>SIM, eSIM y portabilidad</li><li>Web con tu marca y recargas</li><li>Soporte de lanzamiento</li></ul>
+<a href="#diagnostico" style="margin-top: auto; text-decoration: none; text-align: center; border: 1px solid #0F1A1C; color: #0F1A1C; font-weight: 600; padding: 13px; border-radius: 8px; min-height: 44px; box-sizing: border-box;">Quiero arrancar</a>
+</div>
+<div style="background: #0F1A1C; color: #F3F4F1; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;"><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px;">Escala</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: {{accent}}; color: #0F1A1C; border-radius: 6px; padding: 4px 8px;">Para redes de mercadeo</span></div>
+<span style="font-size: 15px; color: #C9D1D2;">Para vender a través de una red de distribuidores.</span>
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px;">Desde $[PRECIO]</div>
+<ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7;"><li>Todo lo de Arranque</li><li>App con tu marca en iOS y Android</li><li>Distribuidores y comisiones multinivel</li><li>WhatsApp y bot de ventas</li></ul>
+<a href="#diagnostico" style="margin-top: auto; text-decoration: none; text-align: center; background: {{accent}}; color: #0F1A1C; font-weight: 600; padding: 13px; border-radius: 8px; min-height: 44px; box-sizing: border-box;">Quiero escalar</a>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;"><strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px;">Integración</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #EEF0EC; border-radius: 6px; padding: 4px 8px;">Para integradores TI</span></div>
+<span style="font-size: 15px; color: #2F3B3D;">Para empaquetar la línea dentro de tus servicios.</span>
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px;">Desde $[PRECIO]</div>
+<ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.7;"><li>Todo lo de Arranque</li><li>API de activación y consumo</li><li>Líneas corporativas y SIM IoT</li><li>Facturación consolidada en CFDI</li></ul>
+<a href="#diagnostico" style="margin-top: auto; text-decoration: none; text-align: center; border: 1px solid #0F1A1C; color: #0F1A1C; font-weight: 600; padding: 13px; border-radius: 8px; min-height: 44px; box-sizing: border-box;">Quiero integrar</a>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section aria-labelledby="faq-title" style="background: #FFFFFF; border-top: 1px solid #D5D9D6; border-bottom: 1px solid #D5D9D6;">
+<div style="max-width: 900px; margin: 0 auto; padding: 80px 24px; display: flex; flex-direction: column; gap: 24px;">
+<h2 id="faq-title" style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(30px, 3.2vw, 42px);">Lo que preguntan antes de firmar</h2>
+<details style="border-top: 1px solid #D5D9D6; padding: 18px 0;"><summary style="cursor: pointer; font-weight: 600; font-size: 18px;">¿Necesito una concesión propia?</summary><p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #2F3B3D;">No para empezar. Operas bajo nuestra concesión única y nosotros respondemos ante la CRT. Si después quieres la tuya, te acompañamos en el trámite.</p></details>
+<details style="border-top: 1px solid #D5D9D6; padding: 18px 0;"><summary style="cursor: pointer; font-weight: 600; font-size: 18px;">¿Los clientes y la marca son míos?</summary><p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #2F3B3D;">[Respuesta: política de titularidad de marca y base de clientes]</p></details>
+<details style="border-top: 1px solid #D5D9D6; padding: 18px 0;"><summary style="cursor: pointer; font-weight: 600; font-size: 18px;">¿Qué cobertura tiene la red?</summary><p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #2F3B3D;">Operamos sobre la Red Compartida de Altán, 4.5G en 700 MHz. Revisa la cobertura por código postal antes de lanzar en una zona.</p></details>
+<details style="border-top: 1px solid #D5D9D6; border-bottom: 1px solid #D5D9D6; padding: 18px 0;"><summary style="cursor: pointer; font-weight: 600; font-size: 18px;">¿Puedo vender a mis clientes empresa con factura?</summary><p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #2F3B3D;">Sí. Emitimos CFDI y puedes consolidar la línea con tus otros servicios.</p></details>
+</div>
+</section>
+
+<!-- CONTACT + GUIDE -->
+<section id="diagnostico" style="max-width: 1240px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start;">
+<div id="guia" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 18px;">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #4A5759;">Siguiente paso</div>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.05;">30 minutos con un especialista. Sales con números, no con un folleto.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #2F3B3D;">Te respondemos por WhatsApp. Además te enviamos la <strong>Guía Definitiva: cómo lanzar un OMV en México</strong>.</p>
+<div style="display: flex; gap: 16px; align-items: center; background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 14px; padding: 16px;">
+<div style="width: 72px; height: 92px; flex: 0 0 auto; border-radius: 6px; background: #0F1A1C; color: #F3F4F1; display: flex; align-items: flex-end; padding: 8px; box-sizing: border-box; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 11px; line-height: 1.1;">Guía OMV México</div>
+<span style="font-size: 15px; line-height: 1.5;">Requisitos, inversión, tiempos y los errores que hunden a un OMV en su primer año.</span>
+</div>
+</div>
+<form style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #D5D9D6; border-radius: 18px; padding: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-name" style="font-size: 14px; font-weight: 600;">Nombre</label><input id="f-name" type="text" autocomplete="name" style="border: 1px solid #A9B4B5; border-radius: 8px; padding: 12px; min-height: 44px; box-sizing: border-box; background: #FFFFFF;"></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-company" style="font-size: 14px; font-weight: 600;">Empresa o red</label><input id="f-company" type="text" autocomplete="organization" style="border: 1px solid #A9B4B5; border-radius: 8px; padding: 12px; min-height: 44px; box-sizing: border-box; background: #FFFFFF;"></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-wa" style="font-size: 14px; font-weight: 600;">WhatsApp</label><input id="f-wa" type="tel" autocomplete="tel" placeholder="+52" style="border: 1px solid #A9B4B5; border-radius: 8px; padding: 12px; min-height: 44px; box-sizing: border-box; background: #FFFFFF;"></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-email" style="font-size: 14px; font-weight: 600;">Correo</label><input id="f-email" type="email" autocomplete="email" style="border: 1px solid #A9B4B5; border-radius: 8px; padding: 12px; min-height: 44px; box-sizing: border-box; background: #FFFFFF;"></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-type" style="font-size: 14px; font-weight: 600;">Tu negocio</label><select id="f-type" style="border: 1px solid #A9B4B5; border-radius: 8px; padding: 12px; min-height: 44px; background: #FFFFFF;"><option>Integrador de TI o redes</option><option>Red de mercadeo / multinivel</option><option>WISP o ISP</option><option>Cadena comercial</option><option>Marca o comunidad</option><option>Otro</option></select></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><label for="f-size" style="font-size: 14px; font-weight: 600;">Clientes o distribuidores hoy</label><select id="f-size" style="border: 1px solid #A9B4B5; border-radius: 8px; padding: 12px; min-height: 44px; background: #FFFFFF;"><option>Menos de 100</option><option>100 a 1,000</option><option>1,000 a 10,000</option><option>Más de 10,000</option></select></div>
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;"><label for="f-when" style="font-size: 14px; font-weight: 600;">¿Cuándo quieres lanzar?</label><select id="f-when" style="border: 1px solid #A9B4B5; border-radius: 8px; padding: 12px; min-height: 44px; background: #FFFFFF;"><option>Este mes</option><option>En 1 a 3 meses</option><option>En más de 3 meses</option><option>Solo estoy explorando</option></select></div>
+<label style="grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: #2F3B3D;"><input type="checkbox" style="width: 20px; height: 20px; margin-top: 1px;"><span>Acepto el <a href="#legales">aviso de privacidad</a> y que me contacten por WhatsApp.</span></label>
+<button type="button" style="grid-column: 1 / -1; cursor: pointer; border: 0; background: {{accent}}; color: #0F1A1C; font-weight: 700; font-size: 17px; padding: 16px; border-radius: 8px; min-height: 48px;">Quiero mi diagnóstico</button>
+</form>
+</section>
+
+<!-- FOOTER -->
+<footer id="legales" style="background: #0F1A1C; color: #C9D1D2;">
+<div style="max-width: 1240px; margin: 0 auto; padding: 56px 24px 32px; display: flex; flex-direction: column; gap: 32px;">
+<div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 22px; color: #F3F4F1;">ABC Telecom</span>
+<span style="font-size: 14px; line-height: 1.6;">Marca operada por Grupo Bitelit, S.A. de C.V.<br>Concesión única [No. de título] · Querétaro, México<br>[Domicilio fiscal]</span>
+</div>
+<nav aria-label="Legales" style="flex: 1 1 420px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; font-size: 14px;">
+<a href="#legales" style="color: #C9D1D2;">Aviso de privacidad</a>
+<a href="#legales" style="color: #C9D1D2;">Términos y condiciones</a>
+<a href="#legales" style="color: #C9D1D2;">Contrato de adhesión (Profeco)</a>
+<a href="#legales" style="color: #C9D1D2;">Carta de derechos mínimos</a>
+<a href="#legales" style="color: #C9D1D2;">Código de prácticas comerciales</a>
+<a href="#legales" style="color: #C9D1D2;">Colaboración con la justicia</a>
+<a href="#legales" style="color: #C9D1D2;">Política de uso justo</a>
+<a href="#legales" style="color: #C9D1D2;">Gestión de tráfico</a>
+</nav>
+</div>
+<div style="border-top: 1px solid #2B3A3D; padding-top: 20px; font-size: 13px; color: #A9B4B5;">© 2026 Grupo Bitelit. Servicio sobre la Red Compartida de Altán Redes.</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF5A1F","options":["#FF5A1F","#F2C14E","#3FD0B6","#7AA7FF"]},"startSegment":{"editor":"enum","options":["ti","mlm","otro"],"default":"ti"},"$preview":{"width":1440,"height":7200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { seg: null, lines: 1000, arpu: 199, margin: 15 };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#FF5A1F';
+    const seg = this.state.seg ?? this.props.startSegment ?? 'ti';
+    const defs = [
+      { id: 'ti', label: 'Soy integrador de TI' },
+      { id: 'mlm', label: 'Tengo una red de mercadeo' },
+      { id: 'otro', label: 'WISP, retail u otro' }
+    ];
+    const segments = defs.map((d) => ({
+      label: d.label,
+      pressed: d.id === seg ? 'true' : 'false',
+      bg: d.id === seg ? '#0F1A1C' : 'transparent',
+      fg: d.id === seg ? '#F3F4F1' : '#0F1A1C',
+      pick: () => this.setState({ seg: d.id })
+    }));
+    const fmt = (n) => '$' + Math.round(n).toLocaleString('es-MX');
+    const lines = this.state.lines, arpu = this.state.arpu, margin = this.state.margin;
+    const monthly = lines * arpu * margin / 100;
+    return {
+      accent,
+      segments,
+      isTI: seg === 'ti',
+      isMLM: seg === 'mlm',
+      isOtro: seg === 'otro',
+      lines, arpu, margin,
+      linesTxt: lines.toLocaleString('es-MX'),
+      arpuTxt: fmt(arpu),
+      marginTxt: margin + '%',
+      monthlyTxt: fmt(monthly),
+      yearlyTxt: fmt(monthly * 12),
+      onLines: (e) => this.setState({ lines: Number(e.target.value) }),
+      onArpu: (e) => this.setState({ arpu: Number(e.target.value) }),
+      onMargin: (e) => this.setState({ margin: Number(e.target.value) })
+    };
+  }
+}
+</script>
+</body>
+</html>
